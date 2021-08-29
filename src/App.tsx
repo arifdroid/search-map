@@ -2,10 +2,12 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import config from './config';
+import { Provider } from 'react-redux';
+import { configureStore } from './modules/store';
+const store = configureStore();
+
 
 function App() {
-
-  console.log("get api key config 4 ->", config)
 
   return (
     <div className="App">
@@ -27,4 +29,12 @@ function App() {
   );
 }
 
-export default App;
+function AppWithRedux(props) {
+  return (
+    <Provider store={store}>
+      <App {...props} />
+    </Provider>
+  )
+}
+
+export default AppWithRedux;
