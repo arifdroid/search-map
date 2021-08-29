@@ -27,7 +27,6 @@ export function Input(props) {
             style={{
                 backgroundColor:'rgba(234,240,240,0.40)',
                 width:400,
-                marginLeft:60,
                 
 
             }}

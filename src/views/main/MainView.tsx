@@ -1,5 +1,6 @@
 import { Autocomplete } from '@react-google-maps/api'
 import React, { useState } from 'react'
+import ButtonIcon from '../shared/button/ButtonIcon'
 import Cardview from '../shared/card/Cardview'
 import InputCustom from '../shared/input/Input'
 import Listview from '../shared/list/Listview'
@@ -37,7 +38,7 @@ export default function MainView() {
             })
             setThisZoom(17)
         } else {
-            // console.log('Autocomplete is not loaded yet!')
+            
         }
     }
 
@@ -60,8 +61,9 @@ export default function MainView() {
                 onLoad={onLoad}
                 onPlaceChanged={onPlaceChanged}
             >
-                <div style={{ flex: 1, }}>
+                <div style={{ flex: 1, marginTop:150, marginLeft:60}}>
                     <InputCustom />
+                    <ButtonIcon type={'DELETE'}/>
                     <div style={{ position: 'absolute' }}>{renderList()}</div>
                 </div>
             </Autocomplete>
