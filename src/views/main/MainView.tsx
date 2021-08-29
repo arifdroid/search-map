@@ -1,5 +1,8 @@
 import { Autocomplete } from '@react-google-maps/api'
 import React, { useState } from 'react'
+import Cardview from '../shared/card/Cardview'
+import InputCustom from '../shared/input/Input'
+import Listview from '../shared/list/Listview'
 import MapView from './MapView'
 
 const center = {
@@ -7,61 +10,61 @@ const center = {
     lng: 101.693207
 }
 
+
+const sample_search = [
+    'seksyen 7',
+    'melaka',
+    'ipoh'
+]
+
 export default function MainView() {
 
-    const [thisautoComplete , setThisAutoComplete]= useState<any>(null)
-    const [thisCenter , setThisCenter]= useState<any>(center)
-    const [thisZoom , setThisZoom]= useState<any>(5)
+    const [thisautoComplete, setThisAutoComplete] = useState<any>(null)
+    const [thisCenter, setThisCenter] = useState<any>(center)
+    const [thisZoom, setThisZoom] = useState<any>(5)
 
-    const onLoad = (autocomplete) => {        
+    const onLoad = (autocomplete) => {
         setThisAutoComplete(autocomplete)
 
     }
 
     const onPlaceChanged = () => {
-        
-        if (thisautoComplete !== null) {            
+
+        if (thisautoComplete !== null) {
             setThisCenter({
-                lat: thisautoComplete.getPlace().geometry.location.lat(),
-                lng: thisautoComplete.getPlace().geometry.location.lng()
+                lat: thisautoComplete?.getPlace().geometry?.location.lat(),
+                lng: thisautoComplete?.getPlace().geometry?.location.lng()
             })
-            setThisZoom(17)            
+            setThisZoom(17)
         } else {
             // console.log('Autocomplete is not loaded yet!')
         }
     }
 
+    const renderList = () => {
+        let rend = sample_search.map(el => {
+            return <Cardview text={el}></Cardview>
+        })
+
+        return rend;
+    }
+
     return (
         <MapView
-        id="searchbox-example"                
-        zoom={thisZoom? thisZoom:3}
-        center={thisCenter? thisCenter:center}
-        
-    >
-        <Autocomplete
-            onLoad={onLoad}
-            onPlaceChanged={onPlaceChanged}
+            id="searchbox-example"
+            zoom={thisZoom ? thisZoom : 3}
+            center={thisCenter ? thisCenter : center}
+
         >
-            <input
-                type="text"
-                placeholder="Customized your placeholder"
-                style={{
-                    boxSizing: `border-box`,
-                    border: `1px solid transparent`,
-                    width: `240px`,
-                    height: `32px`,
-                    padding: `0 12px`,
-                    borderRadius: `3px`,
-                    boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-                    fontSize: `14px`,
-                    outline: `none`,
-                    textOverflow: `ellipses`,
-                    position: "absolute",
-                    left: "50%",
-                    marginLeft: "-120px"
-                }}
-            />
-        </Autocomplete>
-    </MapView>   
+            <Autocomplete
+                onLoad={onLoad}
+                onPlaceChanged={onPlaceChanged}
+            >
+                <div style={{ flex: 1, }}>
+                    <InputCustom />
+                    <div style={{ position: 'absolute' }}>{renderList()}</div>
+                </div>
+            </Autocomplete>
+        </MapView>
     )
 }
