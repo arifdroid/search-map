@@ -33,6 +33,7 @@ const MainView = () => {
             }))
 
         } else {
+            
             dispatch(actions.setCenterFailedAction({ error: 'error dispatch set center' }))
         }
     }

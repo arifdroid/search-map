@@ -23,7 +23,7 @@ export function setAutoCompleteInstanceAction(payload) {
     return { type: AUTOCOMPLETE_INSTANCE_SET, payload };
 }
 
-export const CENTER_SET_REQUEST = 'CENTER_SET';
+export const CENTER_SET_REQUEST = 'CENTER_SET_REQUEST';
 export const CENTER_SET_SUCCESS = 'CENTER_SET_SUCCESS';
 export const CENTER_SET_FAILED = 'CENTER_SET_FAILED';
 
