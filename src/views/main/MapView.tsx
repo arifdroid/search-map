@@ -138,6 +138,7 @@ export default function MapView(props: MapViewProps) {
                 styles: isDarkMode,
                 disableDefaultUI: true,
             }}
+            
         >
             {children}
         </GoogleMap>

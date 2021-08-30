@@ -1,10 +1,11 @@
 import { Autocomplete } from '@react-google-maps/api'
 import React, { useState } from 'react'
-import ButtonIcon from '../shared/button/ButtonIcon'
-import Cardview from '../shared/card/Cardview'
+import HistoryView from '../history/HistoryView'
 import InputCustom from '../shared/input/Input'
-import Listview from '../shared/list/Listview'
+import ToggleSwitch from '../shared/toggle-switch/ToggleSwitch'
 import MapView from './MapView'
+import { useDispatch } from 'react-redux'
+import * as actions from 'src/modules/redux/main/mainAction';
 
 const center = {
     lat: 3.140853,
@@ -12,21 +13,19 @@ const center = {
 }
 
 
-const sample_search = [
-    'seksyen 7',
-    'melaka',
-    'ipoh'
-]
 
 export default function MainView() {
+
+    const dispatch = useDispatch()
 
     const [thisautoComplete, setThisAutoComplete] = useState<any>(null)
     const [thisCenter, setThisCenter] = useState<any>(center)
     const [thisZoom, setThisZoom] = useState<any>(5)
 
-    const onLoad = (autocomplete) => {
-        setThisAutoComplete(autocomplete)
-
+    
+    const onLoad = (autocomplete) => {                
+        // setThisAutoComplete(autocomplete)
+        dispatch(actions.setAutoCompleteInstanceAction(autocomplete))
     }
 
     const onPlaceChanged = () => {
@@ -38,17 +37,11 @@ export default function MainView() {
             })
             setThisZoom(17)
         } else {
-            
+
         }
     }
 
-    const renderList = () => {
-        let rend = sample_search.map(el => {
-            return <Cardview text={el}></Cardview>
-        })
 
-        return rend;
-    }
 
     return (
         <MapView
@@ -57,14 +50,16 @@ export default function MainView() {
             center={thisCenter ? thisCenter : center}
 
         >
+            <ToggleSwitch />
             <Autocomplete
                 onLoad={onLoad}
                 onPlaceChanged={onPlaceChanged}
+                
             >
-                <div style={{ flex: 1, marginTop:150, marginLeft:60}}>
+                <div style={{ flex: 1, marginTop: 150, marginLeft: 60 }}>
+
                     <InputCustom />
-                    <ButtonIcon type={'DELETE'}/>
-                    <div style={{ position: 'absolute' }}>{renderList()}</div>
+                    <HistoryView />
                 </div>
             </Autocomplete>
         </MapView>

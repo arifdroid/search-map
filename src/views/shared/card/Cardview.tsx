@@ -12,19 +12,19 @@ const useStyles = makeStyles({
         minWidth: 275,
         backgroundColor: 'rgba(234,240,240,0.40)',
         marginTop: 10,
-        
+        padding: 0
+
+
     },
     bullet: {
         display: 'inline-block',
         margin: '0 2px',
-        // transform: 'scale(0.8)',
+
     },
     title: {
         fontSize: 14,
     },
-    pos: {
-        marginBottom: 12,
-    },
+
 });
 
 export default function Cardview(props) {
@@ -33,9 +33,9 @@ export default function Cardview(props) {
     const bull = <span className={classes.bullet}>•</span>;
 
     return (
-        <Card className={classes.root} variant="outlined">
-            <CardActionArea>
-                <CardContent>
+        <Card className={classes.root} variant="outlined" style={{ paddingTop: 0, height: 40 }}>
+            <CardActionArea style={{ padding: 0 }}>
+                <CardContent style={{ paddingTop:0 }}>
                     <Typography className={classes.title} color="textSecondary" gutterBottom>
                         {text}
                     </Typography>
