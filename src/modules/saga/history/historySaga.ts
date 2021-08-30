@@ -4,12 +4,11 @@ import { addToHistoryFailedAction, addToHistorySuccessAction, ADD_TO_HISTORY_REQ
 
 function* addHistoryRequest(action){
     try {
-                
-        yield put(addToHistorySuccessAction(action?.payload))
 
+        yield put(addToHistorySuccessAction(action?.payload))
         
     } catch (error) {
-        
+
         yield put(addToHistoryFailedAction(error))
     }
 }

@@ -8,7 +8,6 @@ function* centerMainRequest(action){
     try {
         
         const selectSearchAddress = yield select(mainSelectors.selectSearchAddress)
-        
         yield put(setCenterSuccessAction(action?.payload))
         yield put(addToHistoryRequestAction(selectSearchAddress))
         

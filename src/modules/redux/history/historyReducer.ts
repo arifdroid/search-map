@@ -2,7 +2,7 @@ import { ADD_TO_HISTORY_FAILED, ADD_TO_HISTORY_REQUEST, ADD_TO_HISTORY_SUCCESS, 
 
 interface initialStateProp{
     newSearch:any,
-    historyList:Array<Object>,
+    historyList:Array<String>,
     error:any
 }
 
@@ -24,9 +24,10 @@ const historyReducer = (state = initialState, { type, payload }) => {
     }
     
     if (type === ADD_TO_HISTORY_SUCCESS) {
+
         return {
             ...state,
-            historyList: [...state.historyList].push(payload),            
+            historyList: [...state.historyList, payload],            
         };
     }
 
