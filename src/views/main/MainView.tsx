@@ -1,60 +1,56 @@
 import { Autocomplete } from '@react-google-maps/api'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import HistoryView from '../history/HistoryView'
 import InputCustom from '../shared/input/Input'
 import ToggleSwitch from '../shared/toggle-switch/ToggleSwitch'
 import MapView from './MapView'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
 import * as actions from 'src/modules/redux/main/mainAction';
 
-const center = {
-    lat: 3.140853,
-    lng: 101.693207
-}
+// import { connect, ConnectedProps } from 'react-redux'
 
 
 
-export default function MainView() {
+const MainView = () => {
 
     const dispatch = useDispatch()
-
-    const [thisautoComplete, setThisAutoComplete] = useState<any>(null)
-    const [thisCenter, setThisCenter] = useState<any>(center)
-    const [thisZoom, setThisZoom] = useState<any>(5)
-
+    const stateAutoComplete = useSelector((state: RootStateOrAny) => state?.main?.autoCompleteInstance)
+    const center = useSelector((state: RootStateOrAny) => state?.main?.center)
+    const zoomhere = useSelector((state:RootStateOrAny)=>state.main.zoom)
     
-    const onLoad = (autocomplete) => {                
-        // setThisAutoComplete(autocomplete)
+
+    const onLoad = (autocomplete) => {
         dispatch(actions.setAutoCompleteInstanceAction(autocomplete))
     }
 
     const onPlaceChanged = () => {
 
-        if (thisautoComplete !== null) {
-            setThisCenter({
-                lat: thisautoComplete?.getPlace().geometry?.location.lat(),
-                lng: thisautoComplete?.getPlace().geometry?.location.lng()
-            })
-            setThisZoom(17)
-        } else {
+        if (stateAutoComplete !== null) {
 
+            dispatch(actions.setCenterRequestAction({
+                lat: stateAutoComplete?.getPlace().geometry?.location.lat(),
+                lng: stateAutoComplete?.getPlace().geometry?.location.lng()
+            }))
+
+        } else {
+            dispatch(actions.setCenterFailedAction({ error: 'error dispatch set center' }))
         }
     }
 
-
+    
 
     return (
         <MapView
             id="searchbox-example"
-            zoom={thisZoom ? thisZoom : 3}
-            center={thisCenter ? thisCenter : center}
+            zoom={zoomhere}
+            center={center}
 
         >
             <ToggleSwitch />
             <Autocomplete
                 onLoad={onLoad}
                 onPlaceChanged={onPlaceChanged}
-                
+
             >
                 <div style={{ flex: 1, marginTop: 150, marginLeft: 60 }}>
 
@@ -65,3 +61,8 @@ export default function MainView() {
         </MapView>
     )
 }
+
+export default MainView;
+
+
+

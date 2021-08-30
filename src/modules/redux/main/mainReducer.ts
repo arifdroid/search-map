@@ -1,20 +1,27 @@
-import { AUTOCOMPLETE_INSTANCE_SET, PLACE_CHANGED_FAILED, PLACE_CHANGED_REQUEST, PLACE_CHANGED_SUCCESS, SEARCH_AUTO_FAILED, SEARCH_AUTO_REQUEST, SEARCH_AUTO_SUCCESS, TOGGLE_FAILED, TOGGLE_REQUEST, TOGGLE_SUCCESS } from "./mainAction";
+import {  CENTER_SET_FAILED, CENTER_SET_REQUEST, CENTER_SET_SUCCESS,AUTOCOMPLETE_INSTANCE_SET, TOGGLE_FAILED, TOGGLE_REQUEST, TOGGLE_SUCCESS } from "./mainAction";
 
-interface mainStateProp{
+interface mainStateProp {
     loading: boolean,
     isDarkTheme: boolean,
-    searchGoogleData:Array<{}>,
-    error:{},
-    autoCompleteInstance:any
+    searchGoogleData: Array<{}>,
+    error: {},
+    autoCompleteInstance: any,
+    center: { lat: number, lng: number },
+    zoom:number
 }
 
 
-const initialState : mainStateProp= {
+const initialState: mainStateProp = {
     loading: false,
     isDarkTheme: true,
-    searchGoogleData:[],
-    error:{},
-    autoCompleteInstance:null
+    searchGoogleData: [],
+    error: {},
+    autoCompleteInstance: null,
+    center: {
+        lat: 3.140853,
+        lng: 101.693207
+    },
+    zoom:5
 }
 
 
@@ -22,7 +29,7 @@ const mainReducer = (state = initialState, { type, payload }) => {
     if (type === TOGGLE_REQUEST) {
         return {
             ...state,
-            loading: true,            
+            loading: true,
         };
     }
     if (type === TOGGLE_SUCCESS) {
@@ -37,61 +44,41 @@ const mainReducer = (state = initialState, { type, payload }) => {
         return {
             ...state,
             loading: false,
-            error:payload
+            error: payload
         };
     }
 
-    if (type === SEARCH_AUTO_REQUEST) {
-        return {
-            ...state,
-            loading: true,            
-        };
-    }
-    if (type === SEARCH_AUTO_SUCCESS) {
-        return {
-            ...state,
-            loading: false,
-            searchGoogleData:payload
-            
-        };
-    }
-
-    if (type === SEARCH_AUTO_FAILED) {
-        return {
-            ...state,
-            loading: false,
-            error:payload
-        };
-    }
-
-    if (type === PLACE_CHANGED_REQUEST) {
-        return {
-            ...state,
-            loading: true,            
-        };
-    }
-    if (type === PLACE_CHANGED_SUCCESS) {
-        return {
-            ...state,
-            loading: false,
-            searchGoogleData:payload
-            
-        };
-    }
-
-    if (type === PLACE_CHANGED_FAILED) {
-        return {
-            ...state,
-            loading: false,
-            error:payload
-        };
-    }
 
     if (type === AUTOCOMPLETE_INSTANCE_SET) {
         return {
             ...state,
             loading: false,
-            autoCompleteInstance:payload
+            autoCompleteInstance: payload
+        };
+    }
+
+    if (type === CENTER_SET_REQUEST) {
+        return {
+            ...state,
+            loading: true,
+            center:payload 
+        };
+    }
+    if (type === CENTER_SET_SUCCESS) {
+        
+        return {
+            ...state,
+            loading: false,
+            center:payload ,
+            zoom:17
+        };
+    }
+
+    if (type === CENTER_SET_FAILED) {
+        return {
+            ...state,
+            loading: false,
+            error:payload 
         };
     }
 
