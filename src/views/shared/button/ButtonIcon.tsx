@@ -16,12 +16,13 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface ButtonIconProps{
-    type:string
+    type:string,
+    onclick:any
 }
 
 export default function ButtonIcon(props:ButtonIconProps) {
 
-    const { type } = props;
+    const { type, onclick } = props;
 
 
 
@@ -58,6 +59,7 @@ export default function ButtonIcon(props:ButtonIconProps) {
 
         <div>
             <Button
+                onClick={()=>onclick()}
                 variant="contained"
                 color="secondary"
                 className={classes.button}
