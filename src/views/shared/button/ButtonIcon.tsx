@@ -11,6 +11,8 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         button: {
             margin: theme.spacing(1),
+            fontSize:13,
+            // background: 'linear-gradient(to right bottom, #667EEA, #764BA2)'
         },
     }),
 );
@@ -61,7 +63,7 @@ export default function ButtonIcon(props:ButtonIconProps) {
             <Button
                 onClick={()=>onclick()}
                 variant="contained"
-                color="secondary"
+                color={'secondary'}
                 className={classes.button}
                 startIcon={_typeRender(type)}
             >

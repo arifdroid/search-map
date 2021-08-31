@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { createStyles, InputBase, makeStyles, TextField, Theme } from '@material-ui/core';
+import { createStyles, IconButton, InputBase, makeStyles, Paper, TextField, Theme } from '@material-ui/core';
 import { Search } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
+    
         inputStyle: {
             color: "black",
-            fontWeight:420            
-        },
+            fontWeight: 420,            
+            
+        },    
     }),
 );
 
@@ -70,6 +72,8 @@ export function Input(props) {
             }}
             disabled={disabled}
         />
+     
+
 
     );
 }

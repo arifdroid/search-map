@@ -10,9 +10,13 @@ import { CardActionArea } from '@material-ui/core';
 const useStyles = makeStyles({
     root: {
         minWidth: 275,
-        backgroundColor: 'rgba(234,240,240,0.40)',
+        background: 'linear-gradient(to right bottom, rgba(234,240,240,0.80), rgba(234,240,240,0.40))',
         marginTop: 10,
-        padding: 0
+        paddingTop: 0,        
+        height:40,
+        display:'flex',
+
+        
 
 
     },
@@ -23,6 +27,13 @@ const useStyles = makeStyles({
     },
     title: {
         fontSize: 14,
+        color:'black',
+        fontWeight:450,
+        paddingTop:10,
+        width:350,
+        marginLeft:10,
+        border:0
+        
     },
 
 });
@@ -33,14 +44,11 @@ export default function Cardview(props) {
     const bull = <span className={classes.bullet}>•</span>;
 
     return (
-        <Card className={classes.root} variant="outlined" style={{ paddingTop: 0, height: 40 }}>
-            <CardActionArea style={{ padding: 0 }}>
-                <CardContent style={{ paddingTop:0 }}>
-                    <Typography className={classes.title} color="textSecondary" gutterBottom>
+        <Card className={classes.root} variant="outlined" style={{  }}>                            
+                    <Typography className={classes.title}                                       
+                     >
                         {text}
-                    </Typography>
-                </CardContent>
-            </CardActionArea>
+                    </Typography>                
         </Card>
     );
 }
