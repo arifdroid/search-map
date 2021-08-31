@@ -34,9 +34,12 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:staging": "cross-env REACT_APP_ENVIRONMENT=staging npm run build",
+    "deploy:staging": "npm run build:staging && firebase use staging && firebase deploy",
     "start:localhost": "cross-env REACT_APP_ENVIRONMENT=localhost react-scripts start",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+    
   },
   "eslintConfig": {
     "extends": [
